@@ -2,7 +2,6 @@ package com.dev.backend.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,36 +12,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dev.backend.entity.Estado;
-import com.dev.backend.service.EstadoService;
+import com.dev.backend.entity.Marca;
+import com.dev.backend.service.MarcaService;
 
-//Responde a requisições tipo Rest
 @RestController
-@RequestMapping("/api/estado")
-public class EstadoController {
-
-    @Autowired // inj de dependencia, pra não criar new estadoService
-    private EstadoService estService;
+@RequestMapping("api/marca")
+public class MarcaController {
+    
+    private MarcaService marcaService;
 
     @GetMapping("/")
-    public List<Estado> buscarTodos() {
-        return estService.buscarTodos();
+    public List<Marca> buscarTodos() {
+        return marcaService.buscaTodos();
     }
 
     @PostMapping("/")
-    public Estado inserir(@RequestBody Estado estado) {
-        return estService.inserir(estado);
+    public Marca inserir(@RequestBody Marca marca) {
+        return marcaService.inserir(marca);
     }
 
     @PutMapping("/")
-    public Estado alterar(@RequestBody Estado estado) {
-        return estService.alterar(estado);
+    public Marca alterar(@RequestBody Marca marca) {
+        return marcaService.alterar(marca);
     }
 
-    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable("id") Long id) {
-        estService.excluir(id);
+        marcaService.excluir(id);
         return ResponseEntity.ok().build();
     }
 }
